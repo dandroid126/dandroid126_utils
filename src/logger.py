@@ -50,7 +50,7 @@ class StreamToLogger(object):
 
 
 class Logger:
-    def __init__(self, path_to_output_directory: str):
+    def __init__(self, path_to_output_directory: str, log_level: int = logging.DEBUG, log_file_max_bytes: int = 1 * MEGABYTE, log_backup_count: int = 10, error_backup_count: int = 2):
         """
         Initialize a new instance of the Logger class.
 
@@ -73,18 +73,18 @@ class Logger:
         formatter = logging.Formatter(fmt='%(asctime)s hayato [%(process)d]: [%(levelname)s] %(message)s', datefmt='%b %d %H:%M:%S')
 
         # File Handler
-        file_handler = logging.handlers.RotatingFileHandler(filename=f'{path_to_output_directory}/log.txt', maxBytes=1 * MEGABYTE, backupCount=20)
+        file_handler = logging.handlers.RotatingFileHandler(filename=f'{path_to_output_directory}/log.txt', maxBytes=log_file_max_bytes, backupCount=log_backup_count)
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
 
         # Error File Handler
-        error_file_handler = logging.handlers.RotatingFileHandler(filename=f'{path_to_output_directory}/errors.txt', maxBytes=1 * MEGABYTE, backupCount=2)
+        error_file_handler = logging.handlers.RotatingFileHandler(filename=f'{path_to_output_directory}/errors.txt', maxBytes=log_file_max_bytes, backupCount=error_backup_count)
         error_file_handler.setLevel(logging.ERROR)
         error_file_handler.setFormatter(formatter)
 
         # stdout Handler
         stdout_handler = logging.StreamHandler(sys.stdout)
-        stdout_handler.setLevel(logging.DEBUG)
+        stdout_handler.setLevel(log_level)
         stdout_handler.addFilter(lambda record: record.levelno <= logging.WARN)
         stdout_handler.setFormatter(formatter)
 
