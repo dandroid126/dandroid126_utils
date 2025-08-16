@@ -3,12 +3,12 @@ requires = ["setuptools>=69.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dandroid126-logger"
-version = "1.0.0"
+name = "dandroid126-utils"
+version = "2.0.0"
 authors = [
   { name="dandroid126", email="mail@dandroid.app" },
 ]
-description = "A logger with my personal preference for settings."
+description = "Utils with my personal preference for settings."
 readme = "README.md"
 requires-python = ">=3.11"
 classifiers = [
@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/dandroid126/logger"
-Issues = "https://github.com/dandroid126/logger/issues"
+Homepage = "https://github.com/dandroid126/utils"
+Issues = "https://github.com/dandroid126/utils/issues"

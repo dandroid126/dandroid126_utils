@@ -50,7 +50,7 @@ class StreamToLogger(object):
 
 
 class Logger:
-    def __init__(self, path_to_output_directory: str, log_level: int = logging.DEBUG, log_file_max_bytes: int = 1 * MEGABYTE, log_backup_count: int = 10, error_backup_count: int = 2):
+    def __init__(self, app_name: str, path_to_output_directory: str, log_level: int = logging.DEBUG, log_file_max_bytes: int = 1 * MEGABYTE, log_backup_count: int = 10, error_backup_count: int = 2):
         """
         Initialize a new instance of the Logger class.
 
@@ -70,7 +70,7 @@ class Logger:
         self.logger.setLevel(logging.DEBUG)
 
         # Formatter
-        formatter = logging.Formatter(fmt='%(asctime)s hayato [%(process)d]: [%(levelname)s] %(message)s', datefmt='%b %d %H:%M:%S')
+        formatter = logging.Formatter(fmt=f'%(asctime)s {app_name} [%(process)d]: [%(levelname)s] %(message)s', datefmt='%b %d %H:%M:%S')
 
         # File Handler
         file_handler = logging.handlers.RotatingFileHandler(filename=f'{path_to_output_directory}/log.txt', maxBytes=log_file_max_bytes, backupCount=log_backup_count)
